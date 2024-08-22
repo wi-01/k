@@ -5,7 +5,7 @@ from bot_logic import flip_coin_f
 from bot_logic import gen_emojis
 from settings import settings
 
-prefix = "$"
+prefix = settings["Prefix"]
 commands_list = ["cmds", "hello", "bye", "random_password", "random_emoji", "flip_coin"]
 commands_desc = {
     "cmds" : "Sends all the available commands.",
