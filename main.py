@@ -6,14 +6,16 @@ from bot_logic import gen_emojis
 from settings import settings
 
 prefix = settings["Prefix"]
-commands_list = ["cmds", "hello", "bye", "random_password", "random_emoji", "flip_coin"]
+commands_list = ["cmds", "hello", "bye", "random_password", "random_emoji", "flip_coin", "joined_server", "joined_discord"]
 commands_desc = {
     "cmds" : "Sends all the available commands.",
     "hello" : "Responds with: Hi.",
     "bye" : "Responds with: Bye.",
     "random_password" : "Generates a random password.",
     "random_emoji" : "Generates a random emoji.",
-    "flip_coin" : "Flips a coin."
+    "flip_coin" : "Flips a coin.",
+    "joined_server" : "Tells the date the user joined this server.",
+    "joined_discord" : "Tells the date the user joined Discord.",
 }
 
 intents = discord.Intents.default()
@@ -51,5 +53,13 @@ async def random_emoji(ctx):
 @bot.command()
 async def flip_coin(ctx):
     await ctx.send(flip_coin_f())
+
+@bot.command()
+async def joined_server(ctx, member: discord.Member):
+    await ctx.send(f'{ctx.author.mention} joined this server on {discord.utils.format_dt(member.joined_at)}')
+
+@bot.command()
+async def joined_discord(ctx, member: discord.Member):
+    await ctx.send(f'{ctx.author.mention} joined Discord on {discord.utils.format_dt(member.created_at)}')
 
 bot.run(settings["Token"])
